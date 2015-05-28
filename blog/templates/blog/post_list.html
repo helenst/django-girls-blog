@@ -1,19 +1,11 @@
-<html>
-  <head>
-    <title>Helen's Cheese Blog</title>
-  </head>
-  <body>
-    <div>
-      <h1><a href="">Helen's Cheese Blog</a></h1>
+{% extends "blog/base.html" %}
+
+{% block content %}
+  {% for post in posts %}
+    <div class="posts">
+      <div class="date">published: {{ post.published_date }}</div>
+      <h1><a href="{% url 'blog.views.post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+      <p>{{ post.text|linebreaks }}</p>
     </div>
-    <div>
-      {% for post in posts %}
-        <div>
-          <p>published: {{ post.published_date }}</p>
-          <h1><a href="">{{ post.title }}</a></h1>
-          <p>{{ post.text|linebreaks }}</p>
-        </div>
-      {% endfor %}
-    </div>
-  </body>
-</html>
+  {% endfor %}
+{% endblock %}
